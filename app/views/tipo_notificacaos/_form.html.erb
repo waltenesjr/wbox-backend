@@ -1,0 +1,29 @@
+<%= form_for(@tipo_notificacao) do |f| %>
+  <% if @tipo_notificacao.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@tipo_notificacao.errors.count, "error") %> prohibited this tipo_notificacao from being saved:</h2>
+
+      <ul>
+      <% @tipo_notificacao.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :qtd_dias %><br>
+    <%= f.number_field :qtd_dias %>
+  </div>
+  <div class="field">
+    <%= f.label :mensagem %><br>
+    <%= f.text_field :mensagem %>
+  </div>
+  <div class="field">
+    <%= f.label :ativo %><br>
+    <%= f.check_box :ativo %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

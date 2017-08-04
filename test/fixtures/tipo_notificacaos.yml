@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  qtd_dias: 1
+  mensagem: MyString
+  ativo: false
+
+two:
+  qtd_dias: 1
+  mensagem: MyString
+  ativo: false

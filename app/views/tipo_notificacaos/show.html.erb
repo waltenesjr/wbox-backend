@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Qtd dias:</strong>
+  <%= @tipo_notificacao.qtd_dias %>
+</p>
+
+<p>
+  <strong>Mensagem:</strong>
+  <%= @tipo_notificacao.mensagem %>
+</p>
+
+<p>
+  <strong>Ativo:</strong>
+  <%= @tipo_notificacao.ativo %>
+</p>
+
+<%= link_to 'Edit', edit_tipo_notificacao_path(@tipo_notificacao) %> |
+<%= link_to 'Back', tipo_notificacaos_path %>

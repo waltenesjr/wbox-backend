@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Imagem:</strong>
+  <img src='data:image/jpeg;base64,<%= @produto.imagem %>' width="100" heingth="100"/>
+</p>
+
+<p>
+  <strong>Data vencimento:</strong>
+  <%= @produto.data_vencimento %>
+</p>
+
+<p>
+  <strong>Estabelecimento:</strong>
+  <%= @produto.estabelecimento %>
+</p>
+
+<%= link_to 'Edit', edit_produto_path(@produto) %> |
+<%= link_to 'Back', produtos_path %>

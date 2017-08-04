@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Usuario:</strong>
+  <%= @usuario_periodo.usuario %>
+</p>
+
+<p>
+  <strong>Inicio periodo:</strong>
+  <%= @usuario_periodo.inicio_periodo %>
+</p>
+
+<p>
+  <strong>Fim periodo:</strong>
+  <%= @usuario_periodo.fim_periodo %>
+</p>
+
+<p>
+  <strong>Situacao:</strong>
+  <%= @usuario_periodo.situacao %>
+</p>
+
+<%= link_to 'Edit', edit_usuario_periodo_path(@usuario_periodo) %> |
+<%= link_to 'Back', usuario_periodos_path %>

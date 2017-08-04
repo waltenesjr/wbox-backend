@@ -1,0 +1,29 @@
+<%= form_for(@notificacao_offline) do |f| %>
+  <% if @notificacao_offline.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@notificacao_offline.errors.count, "error") %> prohibited this notificacao_offline from being saved:</h2>
+
+      <ul>
+      <% @notificacao_offline.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :produto_id %><br>
+    <%= f.text_field :produto_id %>
+  </div>
+  <div class="field">
+    <%= f.label :usuario_id %><br>
+    <%= f.text_field :usuario_id %>
+  </div>
+  <div class="field">
+    <%= f.label :data_notificacao %><br>
+    <%= f.date_select :data_notificacao %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

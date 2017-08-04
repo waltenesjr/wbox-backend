@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Usuario Periodos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Usuario</th>
+      <th>Inicio periodo</th>
+      <th>Fim periodo</th>
+      <th>Situacao</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @usuario_periodos.each do |usuario_periodo| %>
+      <tr>
+        <td><%= usuario_periodo.usuario %></td>
+        <td><%= usuario_periodo.inicio_periodo %></td>
+        <td><%= usuario_periodo.fim_periodo %></td>
+        <td><%= usuario_periodo.situacao %></td>
+        <td><%= link_to 'Show', usuario_periodo %></td>
+        <td><%= link_to 'Edit', edit_usuario_periodo_path(usuario_periodo) %></td>
+        <td><%= link_to 'Destroy', usuario_periodo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Usuario periodo', new_usuario_periodo_path %>

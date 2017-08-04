@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Produto:</strong>
+  <%= @notificacao_offline.produto %>
+</p>
+
+<p>
+  <strong>Usuario:</strong>
+  <%= @notificacao_offline.usuario %>
+</p>
+
+<p>
+  <strong>Data notificacao:</strong>
+  <%= @notificacao_offline.data_notificacao %>
+</p>
+
+<%= link_to 'Edit', edit_notificacao_offline_path(@notificacao_offline) %> |
+<%= link_to 'Back', notificacao_offlines_path %>

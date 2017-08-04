@@ -1,0 +1,33 @@
+<%= form_for(@usuario_periodo) do |f| %>
+  <% if @usuario_periodo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@usuario_periodo.errors.count, "error") %> prohibited this usuario_periodo from being saved:</h2>
+
+      <ul>
+      <% @usuario_periodo.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :usuario_id %><br>
+    <%= f.text_field :usuario_id %>
+  </div>
+  <div class="field">
+    <%= f.label :inicio_periodo %><br>
+    <%= f.date_select :inicio_periodo %>
+  </div>
+  <div class="field">
+    <%= f.label :fim_periodo %><br>
+    <%= f.date_select :fim_periodo %>
+  </div>
+  <div class="field">
+    <%= f.label :situacao %><br>
+    <%= f.text_field :situacao %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

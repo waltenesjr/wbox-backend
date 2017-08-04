@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Notificacao Offlines</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Produto</th>
+      <th>Data Vencimento</th>
+      <th>Usuario</th>
+      <th>Data notificacao</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @notificacao_offlines.each do |notificacao_offline| %>
+      <tr>
+        <td><img src='data:image/jpeg;base64,<%= notificacao_offline.produto.nil? ? '' : notificacao_offline.produto.imagem %>' width="100" heingth="100"/></td>
+        <td><%= notificacao_offline.produto.nil? ? '' : notificacao_offline.produto.data_vencimento %></td>
+        <td><%= notificacao_offline.usuario.nil? ? '' : notificacao_offline.usuario.email %></td>
+        <td><%= notificacao_offline.data_notificacao %></td>
+        <td><%= link_to 'Show', notificacao_offline %></td>
+        <td><%= link_to 'Edit', edit_notificacao_offline_path(notificacao_offline) %></td>
+        <td><%= link_to 'Destroy', notificacao_offline, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Notificacao offline', new_notificacao_offline_path %>

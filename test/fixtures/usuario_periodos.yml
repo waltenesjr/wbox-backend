@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  usuario_id: 
+  inicio_periodo: 2016-05-08
+  fim_periodo: 2016-05-08
+  situacao: MyString
+
+two:
+  usuario_id: 
+  inicio_periodo: 2016-05-08
+  fim_periodo: 2016-05-08
+  situacao: MyString

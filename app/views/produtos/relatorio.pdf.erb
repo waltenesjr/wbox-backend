@@ -1,0 +1,142 @@
+<style>
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  th, td {
+      padding: 8px;
+      font-size: 8pt;
+      text-align: center;
+  }
+
+  tr:nth-child(even){background-color: #f2f2f2}
+
+  th {
+      background-color: rgb(0, 51, 102);
+      color: white;
+  }
+
+  .titulo-centralizado {
+    text-align: center;
+  }
+</style>
+
+<img src='http://warningbox.com.br/upload/logo.png' height="100" style="float: left; margin-right: 10px;">
+<h1 class="titulo-centralizado">Relatório de Produtos</h1>
+<br><br><br>
+<p><b>Data de geração do relatório:</b> <%= DateTime.current.to_s(:data_hora) %></p>
+<p><b>Usuario:</b> <%= @usuario.email %></p>
+<% if @periodo_inicio.present? && @periodo_fim.nil? %>
+  <p><b>Produtos com vencimento:</b> a partir de <%= @periodo_inicio.to_s(:data) %>
+<% elsif @periodo_inicio.nil? && @periodo_fim.present? %>
+  <p><b>Produtos com vencimento:</b> até <%= @periodo_fim.to_s(:data) %>
+<% elsif @periodo_inicio.present? && @periodo_fim.present? %>
+  <p><b>Produtos com vencimento:</b> de <%= @periodo_inicio.to_s(:data) %> até <%= @periodo_fim.to_s(:data) %>
+<% end %>
+<br>
+<% if @estabelecimento.nil? %>
+  <% @usuario.estabelecimentos.each do |estabelecimento| %>
+    <h2>Estabelecimento: <%= estabelecimento.nome %></h2>
+
+    <% if @periodo_inicio.nil? && @periodo_fim.nil? 
+        produtos = estabelecimento.produtos.where("data_vencimento >= (?)", Date.today).order(:data_vencimento)
+      elsif @periodo_inicio.nil?
+        produtos = estabelecimento.produtos.where("data_vencimento >= (?) and data_vencimento <= (?)", Date.today, @periodo_fim).order(:data_vencimento)
+      elsif @periodo_fim.nil?
+        produtos = estabelecimento.produtos.where("data_vencimento >= (?)", @periodo_inicio).order(:data_vencimento)
+      else 
+        produtos = estabelecimento.produtos.where("data_vencimento >= (?) and data_vencimento <= (?)", @periodo_inicio, @periodo_fim).order(:data_vencimento)
+    end %>
+
+    <% if produtos.count > 0 %>
+      <table>
+        <thead>
+          <tr>
+            <th>Imagem</th>
+            <th>Data de Vencimento</th>
+            <th>Data de cadastro</th>
+            <th>Categoria</th>
+            <th>Código de Barras</th>
+            <th>Quantidade</th>
+            <th>Valor R$</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+              <% produtos.each do |produto| %>
+                <tr>
+                  <td><img src='data:image/jpeg;base64,<%= produto.imagem %>' width="100" heingth="100"/></td>
+                  <td><%= produto.data_vencimento.to_s(:data) %></td>
+                  <td><%= produto.created_at.to_s(:data) %></td>
+                  <td><%= produto.categoria.blank? ? 'N/A' : produto.categoria %></td>
+                  <td><%= produto.codigo_de_barras.blank? ? 'N/A' : produto.codigo_de_barras %></td>
+                  <td><%= produto.quantidade.blank? ? 'N/A' : produto.quantidade %></td>
+                  <td><%= produto.valor.blank? ? 'N/A' : number_to_currency(produto.valor, unit: '', separator: ',', delimiter: '.') %></td>
+                </tr>
+              <% end %>
+
+        </tbody>
+      </table>
+
+    <% else %>
+    <fieldset>
+      <p>Não existem produtos a vencer para este estabelecimento.</p>
+      </fieldset>
+    <% end %>
+  <% end %>
+<% else %>
+  <h2>Estabelecimento: <%= @estabelecimento.nome %></h2>
+
+  <% if @periodo_inicio.nil? && @periodo_fim.nil? 
+      produtos = @estabelecimento.produtos.where("data_vencimento >= (?)", Date.today).order(:data_vencimento)
+    elsif @periodo_inicio.nil?
+      produtos = @estabelecimento.produtos.where("data_vencimento >= (?) and data_vencimento <= (?)", Date.today, @periodo_fim).order(:data_vencimento)
+    elsif @periodo_fim.nil?
+      produtos = @estabelecimento.produtos.where("data_vencimento >= (?)", @periodo_inicio).order(:data_vencimento)
+    else 
+      produtos = @estabelecimento.produtos.where("data_vencimento >= (?) and data_vencimento <= (?)", @periodo_inicio, @periodo_fim).order(:data_vencimento)
+  end %>
+
+  <% if produtos.count > 0 %>
+    <table>
+      <thead>
+        <tr>
+          <th>Imagem</th>
+          <th>Data de Vencimento</th>
+          <th>Data de cadastro</th>
+          <th>Categoria</th>
+          <th>Código de Barras</th>
+          <th>Quantidade</th>
+          <th>Valor R$</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+            <% produtos.each do |produto| %>
+              <tr>
+                <td><img src='data:image/jpeg;base64,<%= produto.imagem %>' width="100" heingth="100"/></td>
+                <td><%= produto.data_vencimento.to_s(:data) %></td>
+                <td><%= produto.created_at.to_s(:data) %></td>
+                <td><%= produto.categoria.blank? ? 'N/A' : produto.categoria %></td>
+                <td><%= produto.codigo_de_barras.blank? ? 'N/A' : produto.codigo_de_barras %></td>
+                <td><%= produto.quantidade.blank? ? 'N/A' : produto.quantidade %></td>
+                <td><%= produto.valor.blank? ? 'N/A' : number_to_currency(produto.valor, unit: '', separator: ',', delimiter: '.') %></td>
+              </tr>
+            <% end %>
+
+      </tbody>
+    </table>
+
+  <% else %>
+    <fieldset>
+      <p>Não existem produtos a vencer para este estabelecimento.</p>
+    </fieldset>
+  <% end %>
+<% end %>
+<p>N/A = Não se aplica</p>
+<br>
+<br>
+
